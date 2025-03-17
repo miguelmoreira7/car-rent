@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <%= link_to "Car Rent Brasil", root_path, class: "navbar-brand" %>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <span class="nav-link text-white">Olá, <%= current_user.name %>!</span>
+          </li>
+          <li class="nav-item">
+            <%= button_to "Sair", destroy_user_session_path, method: :delete, class: "btn btn-outline-light ms-2" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Entrar", new_user_session_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Cadastrar", new_user_registration_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

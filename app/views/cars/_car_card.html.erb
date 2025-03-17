@@ -1,0 +1,17 @@
+<div class="col-md-4">
+  <div class="card mb-4 shadow">
+    <img src="<%= generate_image_url(car) %>" class="card-img-top" alt="<%= car.model %>">
+    <div class="card-body">
+      <h5 class="card-title"><%= car.manufacturer.name %> <%= car.model %> (<%= car.year %>)</h5>
+      <p class="card-text">
+        <strong>Combustível:</strong> <%= car.fuel_type %><br>
+        <strong>Transmissão:</strong> <%= car.transmission == 'a' ? 'Automático' : 'Manual' %><br>
+        <strong>Tração:</strong> <%= car.drive&.upcase || 'N/A' %><br>
+        <strong>Consumo:</strong> <%= (car.city_mpg.to_f * 0.43).round(2) %> Km/L
+      </p>
+      <div class="d-grid">
+        <%= button_to 'Adicionar ao Carrinho', add_item_cart_path(car_id: car.id), method: :post, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>

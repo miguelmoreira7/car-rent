@@ -1,0 +1,37 @@
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Seu Carrinho</h1>
+
+  <% if @cart && @cart.cart_items.any? %>
+    <div class="row">
+      <% @cart.cart_items.each do |item| %>
+        <div class="col-md-6 col-lg-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="<%= generate_image_url(item.car) %>" class="card-img-top" alt="<%= item.car.model %>">
+            <div class="card-body">
+              <h5 class="card-title text-center"><strong> <%= item.car.manufacturer.name %> <%= item.car.model %> </strong></h5>
+              <p class="card-text text-center">
+                <strong>Quantidade:</strong> <%= item.quantity %> <br>
+                <strong>Combustível:</strong> <%= item.car.fuel_type %> <br>
+                <strong>Transmissão:</strong> <%= item.car.transmission == 'a' ? 'Automático' : 'Manual' %>
+              </p>
+              <div class="d-flex justify-content-between">
+                <%= button_to 'Remover', remove_item_cart_path(car_id: item.car.id), method: :delete, class: "btn btn-danger" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="text-center mt-4">
+      <%= button_to 'Finalizar Compra', checkout_cart_path, method: :post, class: "btn btn-success btn-lg px-5" %>
+    </div>
+  
+  <% else %>
+    <div class="alert alert-warning text-center mt-4">
+      <h4>Seu carrinho está vazio.</h4>
+      <p>Explore nossos carros disponíveis e adicione os que deseja alugar!</p>
+      <%= link_to "Ver Carros", cars_path, class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

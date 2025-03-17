@@ -1,0 +1,33 @@
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Carros Disponíveis</h1>
+
+  <%= form_with url: cars_path, method: :get, local: true, class: "mb-4" do |form| %>
+    <div class="row g-3">
+      <div class="col-md-3">
+        <%= form.label :manufacturer, 'Fabricante' %>
+        <%= form.select :manufacturer, Manufacturer.all.collect { |m| [m.name, m.id] }, include_blank: true, class: "form-control" %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :model, 'Modelo' %>
+        <%= form.text_field :model, class: "form-control" %>
+      </div>
+      <div class="col-md-2">
+        <%= form.label :year, 'Ano' %>
+        <%= form.number_field :year, class: "form-control" %>
+      </div>
+      <div class="col-md-3">
+        <%= form.label :fuel_type, 'Tipo de Combustível' %>
+        <%= form.text_field :fuel_type, class: "form-control" %>
+      </div>
+      <div class="col-md-1 d-flex align-items-end">
+        <%= form.submit 'Filtrar', class: "btn btn-success w-100" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <% @cars.each do |car| %>
+      <%= render 'cars/car_card', car: car %>
+    <% end %>
+  </div>
+</div>
