@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_16_152808) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_17_212957) do
   create_table "cars", force: :cascade do |t|
     t.string "model"
     t.integer "year"
@@ -52,6 +52,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_16_152808) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reservation_items", force: :cascade do |t|
+    t.integer "reservation_id", null: false
+    t.integer "car_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["car_id"], name: "index_reservation_items_on_car_id"
+    t.index ["reservation_id"], name: "index_reservation_items_on_reservation_id"
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_reservations_on_user_id"
+  end
+
   create_table "user_infos", force: :cascade do |t|
     t.integer "user_id"
     t.string "address"
@@ -75,4 +94,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_16_152808) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "reservation_items", "cars"
+  add_foreign_key "reservation_items", "reservations"
+  add_foreign_key "reservations", "users"
 end

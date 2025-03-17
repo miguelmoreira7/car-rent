@@ -9,5 +9,6 @@ class User < ApplicationRecord
   validates :cpf, presence: true, uniqueness: true, format: { with: /\A\d{11}\z/, message: "deve ter 11 dígitos numéricos" }
 
   attribute :admin, :boolean, default: false
+  has_many :reservations, dependent: :destroy
   has_one :cart, class_name: "Cart", foreign_key: "user_id", dependent: :destroy
 end

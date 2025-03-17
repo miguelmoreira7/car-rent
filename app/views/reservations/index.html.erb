@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Minhas Reservas</h1>
+
+  <% if @reservations.any? %>
+    <div class="row">
+      <% @reservations.each do |reservation| %>
+        <div class="col-md-6 col-lg-4">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Reserva #<%= reservation.id %></h5>
+              <p class="card-text">
+                <strong>Data de Início:</strong> <%= reservation.start_date.strftime("%d/%m/%Y") %> <br>
+                <strong>Data de Término:</strong> <%= reservation.end_date.strftime("%d/%m/%Y") %>
+              </p>
+              <h6>Carros Reservados:</h6>
+              <ul class="list-unstyled">
+                <% reservation.reservation_items.each do |item| %>
+                  <li class="d-flex align-items-center mb-2">
+                    <%= image_tag(generate_image_url(item.car), class: "img-thumbnail me-2", width: 100, height: 60) %>
+                    <span><%= item.car.make %> <%= item.car.model %> (Quantidade: <%= item.quantity %>)</span>
+                  </li>
+                <% end %>
+              </ul>
+
+              <% if reservation.start_date > Date.today %>
+                <%= button_to "Cancelar Reserva", cancel_reservation_path(reservation), method: :patch, class: "btn btn-danger mt-3", data: { confirm: "Tem certeza que deseja cancelar esta reserva?" } %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="alert alert-warning text-center">
+      <h4>Você ainda não tem reservas.</h4>
+      <p>Explore nossos carros e faça uma reserva agora!</p>
+      <%= link_to "Ver Carros", cars_path, class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

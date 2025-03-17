@@ -35,4 +35,18 @@ class CartsController < ApplicationController
   def show
     @cart = current_user.cart || current_user.create_cart(status: 'active')
   end
+
+  def checkout
+    @cart = current_user.cart
+    if @cart.cart_items.empty?
+      redirect_to cart_path, alert: "Seu carrinho está vazio!"
+    else
+      redirect_to new_reservation_path
+    end
+  end
+
+  def set_cart
+    @cart = current_user.cart || current_user.create_cart(status: 'active')
+  end
+
 end

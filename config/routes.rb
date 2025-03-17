@@ -14,4 +14,12 @@ Rails.application.routes.draw do
     delete 'remove_item'
     post 'checkout', on: :collection
   end
+
+  #rotas de reservas
+  resources :reservations, only: [:index, :new, :create] do
+    member do
+      patch :cancel
+    end
+  end
+
 end
