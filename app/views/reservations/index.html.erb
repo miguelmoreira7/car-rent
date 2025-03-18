@@ -10,7 +10,8 @@
               <h5 class="card-title">Reserva #<%= reservation.id %></h5>
               <p class="card-text">
                 <strong>Data de Início:</strong> <%= reservation.start_date.strftime("%d/%m/%Y") %> <br>
-                <strong>Data de Término:</strong> <%= reservation.end_date.strftime("%d/%m/%Y") %>
+                <strong>Data de Término:</strong> <%= reservation.end_date.strftime("%d/%m/%Y") %> <br>
+                <strong>Preço Total:</strong> <%= number_to_currency(reservation.total_price) %> <br>
               </p>
               <h6>Carros Reservados:</h6>
               <ul class="list-unstyled">

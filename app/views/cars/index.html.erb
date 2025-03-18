@@ -3,29 +3,45 @@
 
   <%= form_with url: cars_path, method: :get, local: true, class: "mb-4" do |form| %>
     <div class="row g-3">
+    <div class="col-md-2 me-md-3">
+      <%= form.label :model, 'Modelo', class: 'form-label' %>
+      <%= form.text_field :model, value: params[:model], class: "form-control", placeholder: "Digite o modelo", style: "max-width: 100%" %>
+    </div>
+
+    <div class="col-md-3">
+      <%= form.label :manufacturer, 'Fabricante', class: 'form-label' %>
+      <%= form.select :manufacturer, Manufacturer.all.collect { |m| [m.name, m.id] }, 
+          include_blank: 'Selecione o Fabricante', 
+          selected: params[:manufacturer], 
+          class: "form-control" %>
+    </div>
+
+
       <div class="col-md-3">
-        <%= form.label :manufacturer, 'Fabricante' %>
-        <%= form.select :manufacturer, Manufacturer.all.collect { |m| [m.name, m.id] }, include_blank: true, class: "form-control" %>
+        <%= form.label :fuel_type, 'Tipo de Combustível', class: 'form-label' %>
+        <%= form.select :fuel_type, 
+            [['Elétrico', 'electric'], ['Diesel', 'diesel'], ['Gasolina', 'gas']], 
+            include_blank: 'Selecione o Combustível', 
+            selected: params[:fuel_type], 
+            class: "form-control" %>
       </div>
+
       <div class="col-md-3">
-        <%= form.label :model, 'Modelo' %>
-        <%= form.text_field :model, class: "form-control" %>
+        <%= form.label :transmission, 'Transmissão', class: 'form-label' %>
+        <%= form.select :transmission, 
+            [['Automático', 'a'], ['Manual', 'm']], 
+            include_blank: 'Selecione a Transmissão', 
+            selected: params[:transmission], 
+            class: "form-control" %>
       </div>
-      <div class="col-md-2">
-        <%= form.label :year, 'Ano' %>
-        <%= form.number_field :year, class: "form-control" %>
-      </div>
-      <div class="col-md-3">
-        <%= form.label :fuel_type, 'Tipo de Combustível' %>
-        <%= form.text_field :fuel_type, class: "form-control" %>
-      </div>
+
       <div class="col-md-1 d-flex align-items-end">
         <%= form.submit 'Filtrar', class: "btn btn-success w-100" %>
       </div>
     </div>
   <% end %>
 
-  <div class="row">
+  <div class="row mt-4">
     <% @cars.each do |car| %>
       <%= render 'cars/car_card', car: car %>
     <% end %>

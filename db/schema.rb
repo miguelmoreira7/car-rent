@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_17_212957) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_18_211418) do
   create_table "cars", force: :cascade do |t|
     t.string "model"
     t.integer "year"
@@ -28,6 +28,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_17_212957) do
     t.string "transmission"
     t.string "car_class"
     t.string "make"
+    t.decimal "price"
+    t.decimal "daily_rental_price"
   end
 
   create_table "cart_items", force: :cascade do |t|
@@ -68,6 +70,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_17_212957) do
     t.date "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "total_price"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # Rotas de carros
   resources :cars, only: [:index, :show]
 
+  
   # Carrinho de aluguel
   resource :cart, only: [:show] do
     post 'add_item'

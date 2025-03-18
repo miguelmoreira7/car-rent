@@ -7,7 +7,9 @@
         <strong>Combustível:</strong> <%= car.fuel_type %><br>
         <strong>Transmissão:</strong> <%= car.transmission == 'a' ? 'Automático' : 'Manual' %><br>
         <strong>Tração:</strong> <%= car.drive&.upcase || 'N/A' %><br>
-        <strong>Consumo:</strong> <%= (car.city_mpg.to_f * 0.43).round(2) %> Km/L
+        <strong>Consumo:</strong> <%= (car.city_mpg.to_f * 0.43).round(2) %> Km/L<br>
+        <strong>Preço:</strong> <%= number_to_currency(car.price) %><br>
+        <strong>Preço Diário de Aluguel:</strong> <%= number_to_currency(car.daily_rental_price) %><br>
       </p>
       <div class="d-grid">
         <%= button_to 'Adicionar ao Carrinho', add_item_cart_path(car_id: car.id), method: :post, class: "btn btn-primary" %>

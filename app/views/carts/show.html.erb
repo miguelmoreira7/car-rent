@@ -12,7 +12,8 @@
               <p class="card-text text-center">
                 <strong>Quantidade:</strong> <%= item.quantity %> <br>
                 <strong>Combustível:</strong> <%= item.car.fuel_type %> <br>
-                <strong>Transmissão:</strong> <%= item.car.transmission == 'a' ? 'Automático' : 'Manual' %>
+                <strong>Transmissão:</strong> <%= item.car.transmission == 'a' ? 'Automático' : 'Manual' %><br>
+                <strong>Preço Diário de Aluguel:</strong> <%= number_to_currency(item.car.daily_rental_price) %><br>
               </p>
               <div class="d-flex justify-content-between">
                 <%= button_to 'Remover', remove_item_cart_path(car_id: item.car.id), method: :delete, class: "btn btn-danger" %>

@@ -23,6 +23,8 @@ car_data.each do |car|
     highway_mpg: car["highway_mpg"],
     transmission: car["transmission"],
     car_class: car["class"],
+    price: car["price"],
+    daily_rental_price: car["daily_rental_price"],
     created_at: Time.current,
     updated_at: Time.current
   )
